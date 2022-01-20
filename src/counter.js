@@ -1,15 +1,41 @@
-import {useState} from "react";
+import { useReducer, useState } from "react";
+
+const ACTIONS = {
+    INCREMENT: "increment",
+    DECREMENT: "decrement"
+};
+
+const reducer = (state, action) => {
+    if (action.value === undefined) action.value = 1;
+
+    switch (action.type) {
+        case ACTIONS.INCREMENT:
+            return state + action.value;
+        case ACTIONS.DECREMENT:
+            return state - action.value;
+        default: return state;
+    }
+}
 
 const Counter = () => {
-    const [count, increment, decrement] = useCounter();
+    const [count, dispatch] = useReducer(reducer, 0);
+    // const [count, increment, decrement] = useCounter();
+
+    const increment = (val) => { dispatch({
+        type: ACTIONS.INCREMENT, value: val })
+    };
+
+    const decrement = (val) => { dispatch({
+        type: ACTIONS.DECREMENT,
+        value: val })
+    };
 
     return (
         <div>
-            <button onClick={() => increment()}>Minus</button>
+            <button onClick={() => decrement(5)} style={{"margin-right": "7px"}}>Minus</button>
+            <b>{ count }</b>
+            <button onClick={() => increment(5)} style={{"margin-left": "7px"}}>Plus</button>
             <br/>
-            <button onClick={() => decrement()}>Plus</button>
-            <br/>
-            {count}
         </div>
     );
 }
