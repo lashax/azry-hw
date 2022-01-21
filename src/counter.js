@@ -5,9 +5,7 @@ const ACTIONS = {
     DECREMENT: "decrement"
 };
 
-const reducer = (state, action) => {
-    if (action.value === undefined) action.value = 1;
-
+const reducer = (state, action = {value: 1}) => {
     switch (action.type) {
         case ACTIONS.INCREMENT:
             return state + action.value;
@@ -19,7 +17,6 @@ const reducer = (state, action) => {
 
 const Counter = () => {
     const [count, dispatch] = useReducer(reducer, 0);
-    // const [count, increment, decrement] = useCounter();
 
     const increment = (val) => { dispatch({
         type: ACTIONS.INCREMENT, value: val })
@@ -40,18 +37,18 @@ const Counter = () => {
     );
 }
 
-const useCounter = () => {
-    const [count, setCount] = useState(0);
-    const decrement = (val) => {
-        if (val === undefined) val = 1;
-        setCount(count - val);
-    }
-    const increment = (val) => {
-        if (val === undefined) val = 1;
-        setCount(count + val);
-    }
-
-    return [count, decrement, increment];
-}
+// const useCounter = () => {
+//     const [count, setCount] = useState(0);
+//     const decrement = (val) => {
+//         if (val === undefined) val = 1;
+//         setCount(count - val);
+//     }
+//     const increment = (val) => {
+//         if (val === undefined) val = 1;
+//         setCount(count + val);
+//     }
+//
+//     return [count, decrement, increment];
+// }
 
 export default Counter;
