@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Counter from "./counter";
+import Weather from "./weather"
 
 ReactDOM.render(
   <React.StrictMode>
       <Counter/>
+      <Weather />
   </React.StrictMode>,
   document.getElementById('root')
 );
